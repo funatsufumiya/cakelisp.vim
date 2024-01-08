@@ -4,6 +4,17 @@
 " URL:        https://github.com/funatsufumiya/cakelisp.vim
 " License:    MIT License
 
+" =============
+"     NOTE
+" =============
+"
+" - - - - - - - - - - - - -
+"
+" This file is AUTO GENERATED. Do not edit this directly.
+"
+" - - - - - - - - - - - - -
+
+
 if exists("b:current_syntax")
     finish
 endif
