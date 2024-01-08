@@ -1,6 +1,6 @@
 " Vim filetype plugin file
-" Language: JANET
-" Maintainer: Calvin Rose
+" Language: Cakelisp
+" Maintainer: Funatsu Fumiya
 
 if exists("b:did_ftplugin")
 	finish
@@ -20,7 +20,7 @@ setlocal define=\\v[(/]def(ault)@!\\S*
 " Remove 't' from 'formatoptions' to avoid auto-wrapping code.
 setlocal formatoptions-=t
 
-setlocal comments=n:#
-setlocal commentstring=#\ %s
+setlocal comments=n:;;
+setlocal commentstring=;;\ %s
 
 let &cpo = s:cpo_save

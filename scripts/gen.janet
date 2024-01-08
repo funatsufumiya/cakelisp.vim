@@ -8,9 +8,9 @@
 (def template
 `````
 " Vim syntax file
-" Language:   Janet
-" Maintainer: Calvin Rose
-" URL:        https://github.com/janet-lang/janet.vim
+" Language:   Cakelisp
+" Maintainer: Funatsu Fumiya
+" URL:        https://github.com/funatsufumiya/cakelisp.vim
 " License:    MIT License
 
 if exists("b:current_syntax")
@@ -20,27 +20,27 @@ endif
 let s:cpo_sav = &cpo
 set cpo&vim
 
-if has("folding") && exists("g:janet_fold") && g:janet_fold > 0
+if has("folding") && exists("g:cakelisp_fold") && g:cakelisp_fold > 0
     setlocal foldmethod=syntax
 endif
 
-syntax keyword JanetCommentTodo contained FIXME XXX TODO FIXME: XXX: TODO:
+syntax keyword CakelispCommentTodo contained FIXME XXX TODO FIXME: XXX: TODO:
 
-" Janet comments
-syntax match JanetComment "#.*$" contains=JanetCommentTodo,@Spell
+" Cakelisp comments
+syntax match CakelispComment ";;.*$" contains=CakelispCommentTodo,@Spell
 
-syntax match JanetStringEscape '\v\\%([ntvr0zfe"\\]|x[[0-9a-fA-F]]\{2}|u[[0-9a-fA-F]]\{4}|U[[0-9a-fA-F]]\{6})' contained
-syntax region JanetString matchgroup=JanetStringDelimiter start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=JanetStringEscape,@Spell
-syntax region JanetBuffer matchgroup=JanetStringDelimiter start=/@"/ skip=/\\\\\|\\"/ end=/"/ contains=JanetStringEscape,@Spell
-syntax region JanetString matchgroup=JanetStringDelimiter start="\z(`\+\)" end="\z1" contains=@Spell
-syntax region JanetBuffer matchgroup=JanetStringDelimiter start="@\z(`\+\)" end="\z1" contains=@Spell
+syntax match CakelispStringEscape '\v\\%([ntvr0zfe"\\]|x[[0-9a-fA-F]]\{2}|u[[0-9a-fA-F]]\{4}|U[[0-9a-fA-F]]\{6})' contained
+syntax region CakelispString matchgroup=CakelispStringDelimiter start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=CakelispStringEscape,@Spell
+syntax region CakelispBuffer matchgroup=CakelispStringDelimiter start=/@"/ skip=/\\\\\|\\"/ end=/"/ contains=CakelispStringEscape,@Spell
+syntax region CakelispString matchgroup=CakelispStringDelimiter start="\z(`\+\)" end="\z1" contains=@Spell
+syntax region CakelispBuffer matchgroup=CakelispStringDelimiter start="@\z(`\+\)" end="\z1" contains=@Spell
 
-let s:janet_syntax_keywords = {
-    \   'JanetBoolean': ["false","true"]
-    \ , 'JanetConstant': ["nil"]
-    \ , 'JanetSpecialForm': ["if","do","fn","while","def","var","quote","quasiquote","unquote","splice","set","break"]
-    \ , 'JanetFunction': $$FUNCTIONS$$
-    \ , 'JanetMacro': $$MACROS$$
+let s:cakelisp_syntax_keywords = {
+    \   'CakelispBoolean': ["false","true"]
+    \ , 'CakelispConstant': ["nil"]
+    \ , 'CakelispSpecialForm': ["if","do","fn","while","def","var","quote","quasiquote","unquote","splice","set","break"]
+    \ , 'CakelispFunction': $$FUNCTIONS$$
+    \ , 'CakelispMacro': $$MACROS$$
     \ }
 
 function! s:syntax_keyword(dict)
@@ -49,7 +49,7 @@ function! s:syntax_keyword(dict)
     endfor
 endfunction
 
-call s:syntax_keyword(s:janet_syntax_keywords)
+call s:syntax_keyword(s:cakelisp_syntax_keywords)
 
 unlet! s:key
 delfunction s:syntax_keyword
@@ -58,29 +58,29 @@ delfunction s:syntax_keyword
 try
     let s:symcharnodig = '\!\$%\&\*\+\-./:<=>?@A-Z^_a-z|\x80-\U10FFFF'
     " Make sure we support large character ranges in this vim version.
-    execute 'syntax match JanetSymbolDud "\v<%([' . s:symcharnodig . '])%([' . s:symchar . '])*>"'
+    execute 'syntax match CakelispSymbolDud "\v<%([' . s:symcharnodig . '])%([' . s:symchar . '])*>"'
 catch
     let s:symcharnodig = '\!\$%\&\*\+\-./:<=>?@A-Z^_a-z'
 endtry
 
-" Janet special characters
-syntax match JanetQuote "'"
-syntax match JanetSplice ";"
-syntax match JanetQuasiquote "\~"
-syntax match JanetUnquote ","
-syntax match JanetShortFn "|"
+" Cakelisp special characters
+syntax match CakelispQuote "'"
+syntax match CakelispSplice ";"
+syntax match CakelispQuasiquote "\~"
+syntax match CakelispUnquote ","
+syntax match CakelispShortFn "|"
 
-" Janet symbols
+" Cakelisp symbols
 let s:symchar = '0-9' . s:symcharnodig
-execute 'syntax match JanetSymbol "\v<%([' . s:symcharnodig . '])%([' . s:symchar . '])*>"'
-execute 'syntax match JanetKeyword "\v<:%([' . s:symchar . '])*>"'
-execute 'syntax match JanetQuoted "\v' . "'" . '<%([' . s:symcharnodig . '])%([' . s:symchar . '])*>"'
+execute 'syntax match CakelispSymbol "\v<%([' . s:symcharnodig . '])%([' . s:symchar . '])*>"'
+execute 'syntax match CakelispKeyword "\v<:%([' . s:symchar . '])*>"'
+execute 'syntax match CakelispQuoted "\v' . "'" . '<%([' . s:symcharnodig . '])%([' . s:symchar . '])*>"'
 unlet! s:symchar s:symcharnodig
 
-" Janet numbers
+" Cakelisp numbers
 function! s:syntaxNumber(prefix, expo, digit)
   let l:digit = '[_' . a:digit . ']'
-  execute 'syntax match JanetNumber "\v\c<[-+]?' . a:prefix . '%(' .
+  execute 'syntax match CakelispNumber "\v\c<[-+]?' . a:prefix . '%(' .
               \ l:digit . '+|' .
               \ l:digit . '+\.' . l:digit . '*|' .
               \ '\.' . l:digit . '+)%(' . a:expo . '[-+]?[' . a:digit . ']+)?>"'
@@ -94,44 +94,44 @@ call s:syntaxNumber('0x', '\&', '0123456789abcdef')
 unlet! s:radix_chars s:radix
 
 " -*- TOP CLUSTER -*-
-syntax cluster JanetTop contains=@Spell,JanetComment,JanetConstant,JanetQuoted,JanetKeyword,JanetSymbol,JanetNumber,JanetString,JanetBuffer,JanetTuple,JanetArray,JanetTable,JanetStruct,JanetSpecialForm,JanetBoolean,JanetFunction,JanetMacro
+syntax cluster CakelispTop contains=@Spell,CakelispComment,CakelispConstant,CakelispQuoted,CakelispKeyword,CakelispSymbol,CakelispNumber,CakelispString,CakelispBuffer,CakelispTuple,CakelispArray,CakelispTable,CakelispStruct,CakelispSpecialForm,CakelispBoolean,CakelispFunction,CakelispMacro
 
-syntax region JanetTuple matchgroup=JanetParen start="("  end=")" contains=@JanetTop fold
-syntax region JanetArray matchgroup=JanetParen start="@("  end=")" contains=@JanetTop fold
-syntax region JanetTuple matchgroup=JanetParen start="\[" end="]" contains=@JanetTop fold
-syntax region JanetArray matchgroup=JanetParen start="@\[" end="]" contains=@JanetTop fold
-syntax region JanetTable matchgroup=JanetParen start="{"  end="}" contains=@JanetTop fold
-syntax region JanetStruct matchgroup=JanetParen start="@{"  end="}" contains=@JanetTop fold
+syntax region CakelispTuple matchgroup=CakelispParen start="("  end=")" contains=@CakelispTop fold
+syntax region CakelispArray matchgroup=CakelispParen start="@("  end=")" contains=@CakelispTop fold
+syntax region CakelispTuple matchgroup=CakelispParen start="\[" end="]" contains=@CakelispTop fold
+syntax region CakelispArray matchgroup=CakelispParen start="@\[" end="]" contains=@CakelispTop fold
+syntax region CakelispTable matchgroup=CakelispParen start="{"  end="}" contains=@CakelispTop fold
+syntax region CakelispStruct matchgroup=CakelispParen start="@{"  end="}" contains=@CakelispTop fold
 
 " Highlight superfluous closing parens, brackets and braces.
-syntax match JanetError "]\|}\|)"
+syntax match CakelispError "]\|}\|)"
 
 syntax sync fromstart
 
 " Highlighting
-hi def link JanetComment Comment
-hi def link JanetSymbol Normal
-hi def link JanetQuoted Identifier
-hi def link JanetNumber Number
-hi def link JanetConstant Constant
-hi def link JanetBoolean Boolean
-hi def link JanetKeyword Keyword
-hi def link JanetSpecialForm Special
-hi def link JanetFunction Function
-hi def link JanetMacro Macro
-hi def link JanetBuffer String
-hi def link JanetString String
-hi def link JanetStringDelimiter String
-hi def link JanetStringEscape Character
-hi def link JanetQuote SpecialChar
-hi def link JanetSplice SpecialChar
-hi def link JanetQuasiquote SpecialChar
-hi def link JanetUnquote SpecialChar
-hi def link JanetShortFn SpecialChar
-hi def link JanetParen Delimiter
-hi def link JanetError Error
+hi def link CakelispComment Comment
+hi def link CakelispSymbol Normal
+hi def link CakelispQuoted Identifier
+hi def link CakelispNumber Number
+hi def link CakelispConstant Constant
+hi def link CakelispBoolean Boolean
+hi def link CakelispKeyword Keyword
+hi def link CakelispSpecialForm Special
+hi def link CakelispFunction Function
+hi def link CakelispMacro Macro
+hi def link CakelispBuffer String
+hi def link CakelispString String
+hi def link CakelispStringDelimiter String
+hi def link CakelispStringEscape Character
+hi def link CakelispQuote SpecialChar
+hi def link CakelispSplice SpecialChar
+hi def link CakelispQuasiquote SpecialChar
+hi def link CakelispUnquote SpecialChar
+hi def link CakelispShortFn SpecialChar
+hi def link CakelispParen Delimiter
+hi def link CakelispError Error
 
-let b:current_syntax = "janet"
+let b:current_syntax = "cakelisp"
 
 let &cpo = s:cpo_sav
 unlet! s:cpo_sav
@@ -140,4 +140,4 @@ unlet! s:cpo_sav
 (->> template
     (string/replace "$$FUNCTIONS$$" (string "[\"" (string/join functions "\",\"") "\"]"))
     (string/replace "$$MACROS$$" (string "[\"" (string/join macros "\",\"") "\"]"))
-    (spit "syntax/janet.vim"))
+    (spit "syntax/cakelisp.vim"))
