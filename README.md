@@ -29,6 +29,7 @@ $ make # This execute `janet scripts/gen.janet` to generate syntax/cakelisp.vim
 ## TODOs
 
 - Single quote string (not to be confused with keyword symbol)
+- Sort out special forms, macros, and functions
 
 ## Acknowledgements
 
