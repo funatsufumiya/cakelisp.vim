@@ -22,9 +22,9 @@ syntax match CakelispComment ";;.*$" contains=CakelispCommentTodo,@Spell
 
 syntax match CakelispStringEscape '\v\\%([ntvr0zfe"\\]|x[[0-9a-fA-F]]\{2}|u[[0-9a-fA-F]]\{4}|U[[0-9a-fA-F]]\{6})' contained
 syntax region CakelispString matchgroup=CakelispStringDelimiter start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=CakelispStringEscape,@Spell
-syntax region CakelispBuffer matchgroup=CakelispStringDelimiter start=/@"/ skip=/\\\\\|\\"/ end=/"/ contains=CakelispStringEscape,@Spell
-syntax region CakelispString matchgroup=CakelispStringDelimiter start="\z(`\+\)" end="\z1" contains=@Spell
-syntax region CakelispBuffer matchgroup=CakelispStringDelimiter start="@\z(`\+\)" end="\z1" contains=@Spell
+"syntax region CakelispBuffer matchgroup=CakelispStringDelimiter start=/@"/ skip=/\\\\\|\\"/ end=/"/ contains=CakelispStringEscape,@Spell
+"syntax region CakelispString matchgroup=CakelispStringDelimiter start="\z(`\+\)" end="\z1" contains=@Spell
+"syntax region CakelispBuffer matchgroup=CakelispStringDelimiter start="@\z(`\+\)" end="\z1" contains=@Spell
 
 let s:cakelisp_syntax_keywords = {
     \   'CakelispBoolean': ["false","true"]
@@ -56,10 +56,10 @@ endtry
 
 " Cakelisp special characters
 syntax match CakelispQuote "'"
-" syntax match CakelispSplice ";"
-syntax match CakelispQuasiquote "\~"
-syntax match CakelispUnquote ","
-syntax match CakelispShortFn "|"
+"syntax match CakelispSplice ";"
+"syntax match CakelispQuasiquote "\~"
+"syntax match CakelispUnquote ","
+"syntax match CakelispShortFn "|"
 
 " Cakelisp symbols
 let s:symchar = '0-9' . s:symcharnodig
@@ -85,14 +85,14 @@ call s:syntaxNumber('0x', '\&', '0123456789abcdef')
 unlet! s:radix_chars s:radix
 
 " -*- TOP CLUSTER -*-
-syntax cluster CakelispTop contains=@Spell,CakelispComment,CakelispConstant,CakelispQuoted,CakelispKeyword,CakelispSymbol,CakelispNumber,CakelispString,CakelispBuffer,CakelispTuple,CakelispArray,CakelispTable,CakelispStruct,CakelispSpecialForm,CakelispBoolean,CakelispFunction,CakelispMacro
+syntax cluster CakelispTop contains=@Spell,CakelispComment,CakelispConstant,CakelispQuoted,CakelispKeyword,CakelispSymbol,CakelispNumber,CakelispString,CakelispTuple,CakelispTable,CakelispSpecialForm,CakelispBoolean,CakelispFunction,CakelispMacro
 
 syntax region CakelispTuple matchgroup=CakelispParen start="("  end=")" contains=@CakelispTop fold
-syntax region CakelispArray matchgroup=CakelispParen start="@("  end=")" contains=@CakelispTop fold
+"syntax region CakelispArray matchgroup=CakelispParen start="@("  end=")" contains=@CakelispTop fold
 syntax region CakelispTuple matchgroup=CakelispParen start="\[" end="]" contains=@CakelispTop fold
-syntax region CakelispArray matchgroup=CakelispParen start="@\[" end="]" contains=@CakelispTop fold
+"syntax region CakelispArray matchgroup=CakelispParen start="@\[" end="]" contains=@CakelispTop fold
 syntax region CakelispTable matchgroup=CakelispParen start="{"  end="}" contains=@CakelispTop fold
-syntax region CakelispStruct matchgroup=CakelispParen start="@{"  end="}" contains=@CakelispTop fold
+"syntax region CakelispStruct matchgroup=CakelispParen start="@{"  end="}" contains=@CakelispTop fold
 
 " Highlight superfluous closing parens, brackets and braces.
 syntax match CakelispError "]\|}\|)"
@@ -110,15 +110,15 @@ hi def link CakelispKeyword Keyword
 hi def link CakelispSpecialForm Special
 hi def link CakelispFunction Function
 hi def link CakelispMacro Macro
-hi def link CakelispBuffer String
+"hi def link CakelispBuffer String
 hi def link CakelispString String
 hi def link CakelispStringDelimiter String
 hi def link CakelispStringEscape Character
 hi def link CakelispQuote SpecialChar
-" hi def link CakelispSplice SpecialChar
-hi def link CakelispQuasiquote SpecialChar
-hi def link CakelispUnquote SpecialChar
-hi def link CakelispShortFn SpecialChar
+"hi def link CakelispSplice SpecialChar
+"hi def link CakelispQuasiquote SpecialChar
+"hi def link CakelispUnquote SpecialChar
+"hi def link CakelispShortFn SpecialChar
 hi def link CakelispParen Delimiter
 hi def link CakelispError Error
 
