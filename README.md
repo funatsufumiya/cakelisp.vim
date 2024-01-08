@@ -1,8 +1,10 @@
 # cakelisp.vim (Unofficial)
 
-***WARNING: Still work in progress.***
-
 Syntax files for [Cakelisp](https://macoy.me/code/macoy/cakelisp) in Vim (Unofficial).
+
+## Screenshots
+
+![screenshot](screenshots/cakelisp-vim-screenshot.png)
 
 ## Install with Vundle
 
@@ -23,6 +25,10 @@ Plug 'https://github.com/funatsufumiya/cakelisp.vim.git'
 ```bash
 $ make # This execute `janet scripts/gen.janet` to generate syntax/cakelisp.vim
 ```
+
+## TODOs
+
+- Single quote string (not to be confused with keyword symbol)
 
 ## Acknowledgements
 
