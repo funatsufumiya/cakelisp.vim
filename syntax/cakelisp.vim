@@ -74,7 +74,7 @@ function! s:syntaxNumber(prefix, expo, digit)
   execute 'syntax match CakelispNumber "\v\c<[-+]?' . a:prefix . '%(' .
               \ l:digit . '+|' .
               \ l:digit . '+\.' . l:digit . '*|' .
-              \ '\.' . l:digit . '+)%(' . a:expo . '[-+]?[' . a:digit . ']+)?>"'
+              \ '\.' . l:digit . '+)%(' . a:expo . '[-+]?[' . a:digit . ']+)?f?>"'
 endfunction
 let s:radix_chars = "0123456789abcdefghijklmnopqrstuvwxyz"
 for s:radix in range(2, 36)
