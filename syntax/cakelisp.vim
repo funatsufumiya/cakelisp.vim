@@ -18,7 +18,7 @@ endif
 syntax keyword CakelispCommentTodo contained FIXME XXX TODO FIXME: XXX: TODO:
 
 " Cakelisp comments
-syntax match CakelispComment ";;.*$" contains=CakelispCommentTodo,@Spell
+syntax match CakelispComment "\\;\\;.*$" contains=CakelispCommentTodo,@Spell
 
 syntax match CakelispStringEscape '\v\\%([ntvr0zfe"\\]|x[[0-9a-fA-F]]\{2}|u[[0-9a-fA-F]]\{4}|U[[0-9a-fA-F]]\{6})' contained
 syntax region CakelispString matchgroup=CakelispStringDelimiter start=/"/ skip=/\\\\\|\\"/ end=/"/ contains=CakelispStringEscape,@Spell
