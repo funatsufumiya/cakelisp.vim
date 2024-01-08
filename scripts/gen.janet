@@ -65,7 +65,7 @@ endtry
 
 " Cakelisp special characters
 syntax match CakelispQuote "'"
-syntax match CakelispSplice ";"
+" syntax match CakelispSplice ";"
 syntax match CakelispQuasiquote "\~"
 syntax match CakelispUnquote ","
 syntax match CakelispShortFn "|"
@@ -124,7 +124,7 @@ hi def link CakelispString String
 hi def link CakelispStringDelimiter String
 hi def link CakelispStringEscape Character
 hi def link CakelispQuote SpecialChar
-hi def link CakelispSplice SpecialChar
+" hi def link CakelispSplice SpecialChar
 hi def link CakelispQuasiquote SpecialChar
 hi def link CakelispUnquote SpecialChar
 hi def link CakelispShortFn SpecialChar
