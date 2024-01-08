@@ -1,6 +1,6 @@
-# cakelisp.vim (Unofficial)
+# cakelisp.vim
 
-Syntax files for [Cakelisp](https://macoy.me/code/macoy/cakelisp) in Vim (Unofficial).
+Syntax files for [Cakelisp](https://macoy.me/code/macoy/cakelisp) in Vim (**Unofficial**).
 
 ## Screenshots
 
